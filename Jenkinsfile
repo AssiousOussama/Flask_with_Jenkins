@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        VENV_DIR = 'venv'
+    }
+
     stages {
         stage('Pull Code') {
             steps {
@@ -8,15 +12,32 @@ pipeline {
             }
         }
 
+        stage('Setup Python Environment') {
+            steps {
+                // Crée un environnement virtuel si non existant
+                sh '''
+                python3 -m venv $VENV_DIR
+                source $VENV_DIR/bin/activate
+                pip install --upgrade pip
+                '''
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh '''
+                source $VENV_DIR/bin/activate
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Flask App') {
             steps {
-                sh 'nohup python3 app.py &'
+                sh '''
+                source $VENV_DIR/bin/activate
+                nohup python3 app.py > flask.log 2>&1 &
+                '''
             }
         }
     }
