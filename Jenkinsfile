@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Pull Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/ton-compte/flask-demo.git'
+                git branch: 'main', url: 'https://github.com/AssiousOussama/Flask_with_Jenkins.git'
             }
         }
 
