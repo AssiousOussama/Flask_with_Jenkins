@@ -14,11 +14,10 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                // Crée un environnement virtuel si non existant
                 sh '''
-                python3 -m venv $VENV_DIR
-                source $VENV_DIR/bin/activate
-                pip install --upgrade pip
+                    #!/bin/bash
+                    python3 -m venv venv
+                    source venv/bin/activate
                 '''
             }
         }
