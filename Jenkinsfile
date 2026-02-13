@@ -33,7 +33,7 @@ pipeline {
         stage('Run Flask App') {
             steps {
                 sh '''
-                source $VENV_DIR/bin/activate
+                . $VENV_DIR/bin/activate
                 nohup python3 app.py > flask.log 2>&1 &
                 '''
             }
