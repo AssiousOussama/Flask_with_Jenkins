@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh '''
                 . $VENV_DIR/bin/activate
-                nohup python3 app.py > flask.log 2>&1 &
+                python3 app.py
                 '''
             }
         }
